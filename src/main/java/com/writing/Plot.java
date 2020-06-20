@@ -11,12 +11,13 @@ public class Plot {
     static final int MAX_CAST = 40;
 
     Map<String, Actor> cast;
-    Set<House> houses;
+    FastRandomAccessHashSet<House> houses;
     public Plot (){
         
         cast = new TreeMap<>((a,b) -> a.compareTo(b));
-        houses = new HashSet<>();
+        houses = new FastRandomAccessHashSet<House>();
         for (int i = 0; i < MAX_CAST; i++){
+            //boolean newLineage()
             
             Name name = new Name (Utils.randomNameGenerator(), Utils.randomNameGenerator());
             long count = 0;
@@ -30,7 +31,7 @@ public class Plot {
             }
             Actor actor  = new Actor(name);
             cast.put(actor.name.lastCommaFirst, actor);
-            if (!houses.contains(actor.name.last) && Utils.diceRoll(3) == 0){
+            if  (Utils.diceRoll(3) == 0){
                 houses.add(new House(actor.name.last, actor.gender, houses.size() == 0));
             }
         }
@@ -41,7 +42,7 @@ public class Plot {
     public String toString(){
         StringBuilder result = new StringBuilder();
 
-        for(House entry: houses){
+        for(House entry: houses.set){
             result.append("House " + entry.name + " | is Matrilinear " + entry.matrilinear +  " | is Royal " + entry.royal + "\n");
         }
         result.append ("\n");
