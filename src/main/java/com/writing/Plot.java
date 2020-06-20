@@ -1,17 +1,31 @@
 import java.util.TreeMap;
+import java.util.Map;
+import java.util.Comparator;
 
 public class Plot {
 
-    TreeMap<String, Character> tree;
+    TreeMap<Name, Actor> tree;
     public Plot (){
-        tree = new TreeMap<>();
-        Name name = new Name("agag", "gagag");
-        Character first  = new Character(new Name (Utils.randomNameGenerator(), Utils.randomNameGenerator()));
+        
+        tree = new TreeMap<>(new Comparator <Name>(){
 
+            @Override
+            public int compare (Name a, Name b){
+                return (a.lastCommaFirst.compareTo(b.lastCommaFirst));
+            }
+
+        });
+        Actor original  = new Actor(new Name (Utils.randomNameGenerator(), Utils.randomNameGenerator()));
+        tree.put(original.name, original);
     }
     @Override
     public String toString(){
-        return Utils.randomNameGenerator() + " " + Utils.randomNameGenerator();
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<Name, Actor> entry: tree.entrySet()){
+
+            result.append(entry.getKey().lastCommaFirst + "\n"); 
+        }
+        return result.toString();
     }
     
     public static void main (String[] args){

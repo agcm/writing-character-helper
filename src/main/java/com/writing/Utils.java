@@ -12,9 +12,11 @@ public class Utils {
         String result = "";
         boolean vowelFirst = random.nextInt(2) == 0 ? true: false;
         boolean capitalize = true;        
-        int length = random.nextInt(8) + 2;
-        
-        for (int i = vowelFirst? 0 : 1; i < length; i ++){
+        int length = random.nextInt(8);
+        //Minimum length should be 1 or 2 respectively
+        length = vowelFirst? length + 1 : length + 2;
+
+        for (int i = vowelFirst? 0 : 1; i <= length; i ++){
             if (i % 2 == 1){
                 char value = consonants[random.nextInt(consonants.length)];
                 value = capitalLetter(value, capitalize);

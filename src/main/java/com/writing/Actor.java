@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Comparator;
 
-class Character {
+class Actor {
 
     Name name;
 
-    Set <Character> allies;
-    Set <Character> enemies;
+    Set <Actor> allies;
+    Set <Actor> enemies;
     List<Action> queuedPlans;
     Queue<Action> priorityPlans;
     
-    Character lineage;
-    Character pledgedLoyalty;
+    Actor lineage;
+    Actor pledgedLoyalty;
 
-    Character (Name name){
+    Actor (Name name){
         this.name = name;
         allies = new HashSet<>();
         enemies = new HashSet<>();
