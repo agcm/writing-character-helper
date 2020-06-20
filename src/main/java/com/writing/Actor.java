@@ -7,20 +7,26 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Comparator;
 
-class Actor {
+class Actor{
 
+    
     Name name;
-
+    boolean gender;
     Set <Actor> allies;
     Set <Actor> enemies;
     List<Action> queuedPlans;
     Queue<Action> priorityPlans;
     
-    Actor lineage;
+    House house;
     Actor pledgedLoyalty;
+    Actor mother;
+    Actor father;
+
+
 
     Actor (Name name){
         this.name = name;
+        this.gender = Utils.coinFlip();
         allies = new HashSet<>();
         enemies = new HashSet<>();
         queuedPlans = new LinkedList<>();
