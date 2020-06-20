@@ -7,5 +7,6 @@ public class House {
         this.name = name;
         this.matrilinear = matrilinear;
         this.royal = royal;
+        
     }
 }

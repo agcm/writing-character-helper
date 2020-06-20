@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.lang.Character;
+import java.lang.Math;
 
 public class Utils {
     //remove seed for pseudo randomness
@@ -14,6 +15,7 @@ public class Utils {
     }
 
     public static int diceRoll (int sided){
+       
         return RANDOM.nextInt(sided);
     }
 
@@ -66,16 +68,11 @@ public class Utils {
 
     public static long permutations(){
         // worst case scenario is MAX_RANDOM_LENGTH + 2  and then interlacing multiplication starting with CONSONANTS.
-        long result = 1;
-        for (int i = 0; i < MAX_RANDOM_LENGTH + 2; i ++){
-            
-            if (i % 2 == 0){
-                result *= CONSONANTS.length;
-            } else {
-                result *= VOWELS.length;
-            }
-        }
-        return result;
+
+        return (long) Math.pow(CONSONANTS.length, Math.round(MAX_RANDOM_LENGTH / 2.0)) 
+             * (long) Math.pow(VOWELS.length, MAX_RANDOM_LENGTH/ 2); 
+        
+        
 
     }   
 }

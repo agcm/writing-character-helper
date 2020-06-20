@@ -24,9 +24,9 @@ class Actor{
 
 
 
-    Actor (Name name){
+    Actor (Name name, boolean gender){
         this.name = name;
-        this.gender = Utils.coinFlip();
+        this.gender = gender;
         allies = new HashSet<>();
         enemies = new HashSet<>();
         queuedPlans = new LinkedList<>();

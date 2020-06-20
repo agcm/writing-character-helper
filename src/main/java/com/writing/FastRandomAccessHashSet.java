@@ -19,7 +19,9 @@ public class FastRandomAccessHashSet <T> {
     }
 
     public T getRandom(){
-        return get(Utils.diceRoll(list.size()));
+        
+        Integer index = Utils.diceRoll(list.size());
+        return get(index);
     }
 
     public T get(int index){

@@ -8,7 +8,7 @@ import java.util.Comparator;
 
 public class Plot {
 
-    static final int MAX_CAST = 40;
+    static final int MAX_CAST = 100;
 
     Map<String, Actor> cast;
     FastRandomAccessHashSet<House> houses;
@@ -17,13 +17,21 @@ public class Plot {
         cast = new TreeMap<>((a,b) -> a.compareTo(b));
         houses = new FastRandomAccessHashSet<House>();
         for (int i = 0; i < MAX_CAST; i++){
+            House house = null;
             String lastName = "";
+            boolean gender = Utils.coinFlip();
             //determine if new last name is generated
-            if (Utils.diceRoll(10) < 4){
+            if (houses.size() == 0 || Utils.diceRoll(10) < 4){
                 lastName = Utils.randomNameGenerator();
+                if (!houses.contains(lastName)){
+                    house = new House(lastName, gender, houses.size() == 0);
+                    houses.add(lastName, house);
+                }
             } else {
-                lastName = houses.getRandom().name;
+                house = houses.getRandom();
+                lastName = house.name;
             }
+
             
             Name name = new Name (Utils.randomNameGenerator(), lastName);
             long count = 0;
@@ -35,11 +43,10 @@ public class Plot {
                 }
                 count ++;
             }
-            Actor actor  = new Actor(name);
+            Actor actor  = new Actor(name, gender);
             cast.put(actor.name.lastCommaFirst, actor);
-            if  (Utils.diceRoll(3) == 0){
-                houses.add(actor.name.last, new House(actor.name.last, actor.gender, houses.size() == 0));
-            }
+            actor.house = house;            
+
         }
         
         
