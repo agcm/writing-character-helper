@@ -6,13 +6,13 @@ import java.util.Collections;
 public class FastRandomAccessHashSet <T> {
     ArrayList<T> list = new ArrayList<>();
     HashMap<T, Integer> map = new HashMap<>();
-    HashSet<T> set = new HashSet<>();
+    HashSet<String> set = new HashSet<>();
 
 
 
-    public void add(T value){
-        if (!set.contains(value)){
-            set.add(value);
+    public void add(String name, T value){
+        if (!set.contains(name)){
+            set.add(name);
             list.add(value);
             map.put(value, list.size() - 1);
         }
@@ -26,9 +26,9 @@ public class FastRandomAccessHashSet <T> {
         return list.get(index);
     }
 
-    public void remove(T value){
-        if (set.contains(value)){
-            set.remove(value);
+    public void remove(String name, T value){
+        if (set.contains(name)){
+            set.remove(name);
             int index = map.get(value);
             T newValue = list.get(list.size() -1);
             map.put(newValue, index);
@@ -38,8 +38,8 @@ public class FastRandomAccessHashSet <T> {
         }     
     }
 
-    public boolean contains(T value){
-        return set.contains(value);
+    public boolean contains(String name){
+        return set.contains(name);
     }
 
     public int size(){
